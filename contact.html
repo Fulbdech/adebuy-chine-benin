@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — ADEBUY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1782870219514300');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1782870219514300&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<header>
+  <div class="nav wrap">
+    <div class="brand"><img src="assets/logo.png" alt="Adebuy"><b>ADEBUY</b></div>
+    <nav class="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="suivi.html">Suivi</a>
+      <a href="politique.html">Politique</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20veux%20en%20savoir%20plus%20sur%20Adebuy" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+      <span>+229 01 94 93 55 86</span>
+    </a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="kicker">Commencer</div>
+    <h1>Décrivez-nous votre besoin</h1>
+    <p>Remplissez ce court formulaire — on vous répond avec une recherche de prix personnalisée sur WhatsApp.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="order-panel">
+      <form id="order-form" onsubmit="sendOrder(event)">
+        <div class="order-grid">
+          <div class="field">
+            <label for="order-name">Votre nom</label>
+            <input type="text" id="order-name" placeholder="Ex. Junior">
+          </div>
+          <div class="field">
+            <label for="order-phone">Votre numéro</label>
+            <input type="text" id="order-phone" placeholder="Ex. 01 XX XX XX XX">
+          </div>
+          <div class="field">
+            <label for="order-profile">Vous êtes</label>
+            <select id="order-profile">
+              <option value="Particulier">Particulier</option>
+              <option value="Revendeur">Revendeur</option>
+              <option value="Entrepreneur">Entrepreneur</option>
+              <option value="Entreprise">Entreprise</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="order-qty">Quantité</label>
+            <input type="text" id="order-qty" placeholder="Ex. 2">
+          </div>
+          <div class="field full">
+            <label for="order-product">Le produit recherché</label>
+            <textarea id="order-product" placeholder="Ex. Une paire d'enceintes Bluetooth, modèle X, environ 2 unités"></textarea>
+          </div>
+          <div class="field">
+            <label for="order-transport">Transport préféré</label>
+            <select id="order-transport">
+              <option value="Pas de préférence">Pas de préférence</option>
+              <option value="Aérien (1-2 mois)">Aérien (1-2 mois)</option>
+              <option value="Maritime (2-3 mois)">Maritime (2-3 mois)</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="order-note">Précisions (lien produit, budget, couleur...)</label>
+            <textarea id="order-note" placeholder="Ex. Lien du produit si vous en avez un, budget approximatif"></textarea>
+          </div>
+        </div>
+        <div class="order-submit">
+          <button class="btn btn-primary" type="submit">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+            Envoyer ma demande sur WhatsApp
+          </button>
+          <span class="order-hint">Ouvre WhatsApp avec votre demande déjà rédigée — modifiable avant l'envoi.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="trust-grid" style="grid-template-columns:repeat(2,1fr);">
+      <div class="tcard">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15v-3a8 8 0 0 1 16 0v3"/><path d="M4 15a2 2 0 0 0 2 2h1v-5H4Z"/><path d="M20 15a2 2 0 0 1-2 2h-1v-5h3Z"/></svg></div>
+        <h3>Disponibilité</h3>
+        <p>Service client 24/7 sur WhatsApp</p>
+      </div>
+      <div class="tcard">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Zone</h3>
+        <p>Cotonou et environs, Bénin</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Accueil</a><a href="tarifs.html">Tarifs</a><a href="suivi.html">Suivi</a><a href="politique.html">Politique</a><a href="contact.html">Contact</a>
+  </div>
+  © 2026 ADEBUY — Tout ce dont vous avez besoin, en un seul endroit. Cotonou, Bénin.
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
