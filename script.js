@@ -1,3 +1,9 @@
+// ---------- Mobile nav toggle ----------
+function toggleNav(){
+  const nav = document.getElementById('nav-links');
+  if (nav) nav.classList.toggle('open');
+}
+
 // ---------- Order form (used on contact.html) ----------
 function sendOrder(e){
   e.preventDefault();
@@ -44,8 +50,7 @@ function downloadPdf(el, filename){
 }
 
 // ---------- Tracking lookup (used on suivi.html) ----------
-// Replace this with the "pub?output=csv" link from your published Google Sheet.
-const TRACKING_SHEET_CSV_URL = 'REPLACE_WITH_YOUR_SHEET_CSV_URL';
+const TRACKING_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRebDwwx8z8IjuEa1Hu8DYr2oNA__1K4RU0D0RtXtXQeEFvYi_2dIBE1fH3fkrwXggJkrGf4sGpcjxF/pub?gid=0&single=true&output=csv';
 
 function parseCSV(text){
   const lines = text.trim().split(/\r?\n/);
@@ -99,21 +104,33 @@ function renderTracking(row, box){
     {key:'DateArrive', label:'Arrivé (Bénin)'},
     {key:'DateDisponible', label:'Disponible'}
   ];
-  const doneCount = steps.filter(s => row[s.key] && row[s.key].trim() !== '').length;
+
+  function cellState(raw){
+    const v = (raw || '').trim();
+    if (!v) return {state:'empty', text:''};
+    if (/^estm\.?/i.test(v)) return {state:'estimated', text:v.replace(/^estm\.?\s*/i, 'Est. ')};
+    return {state:'done', text:v};
+  }
+
+  const parsed = steps.map(s => ({...s, ...cellState(row[s.key])}));
+  const doneCount = parsed.filter(s => s.state === 'done').length;
   const progressPct = doneCount === 0 ? 0 : ((doneCount - 1) / (steps.length - 1)) * 100;
 
   let html = '<div class="track-result">';
   html += '<div class="rp-name">' + (row.Produit || 'Votre colis') + '</div>';
   html += '<div class="rp-num">N° ' + row.Numero + ' · Statut : ' + (row.Statut || '—') + '</div>';
   html += '<div class="track-timeline"><div class="tt-progress" style="width:' + progressPct + '%"></div>';
-  steps.forEach((s, i) => {
-    const isDone = row[s.key] && row[s.key].trim() !== '';
-    html += '<div class="tt-step ' + (isDone ? 'done' : '') + '">';
-    html += '<div class="c">' + (isDone
-      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 12 10 18 20 6"/></svg>'
-      : (i+1)) + '</div>';
+  parsed.forEach((s) => {
+    html += '<div class="tt-step ' + (s.state === 'done' ? 'done' : '') + (s.state === 'estimated' ? ' estimated' : '') + '">';
+    if (s.state === 'done') {
+      html += '<div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="4 12 10 18 20 6"/></svg></div>';
+    } else if (s.state === 'estimated') {
+      html += '<div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>';
+    } else {
+      html += '<div class="c"></div>';
+    }
     html += '<span>' + s.label + '</span>';
-    if (isDone) html += '<div class="dte">' + row[s.key] + '</div>';
+    if (s.text) html += '<div class="dte">' + s.text + '</div>';
     html += '</div>';
   });
   html += '</div></div>';
