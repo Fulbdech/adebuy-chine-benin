@@ -13,9 +13,9 @@ const PRECACHE_URLS = [
   'style.css',
   'script.js',
   'manifest.json',
-  'assets/logo.png',
-  'assets/icon-192.png',
-  'assets/icon-512.png'
+  'logo.png',
+  'icon-192.png',
+  'icon-512.png'
 ];
 
 // ---------- Install: pre-cache the core pages/assets ----------
@@ -86,8 +86,8 @@ self.addEventListener('push', (event) => {
   const title = data.notification?.title || 'Adebuy';
   const options = {
     body: data.notification?.body || '',
-    icon: 'assets/icon-192.png',
-    badge: 'assets/icon-192.png',
+    icon: 'icon-192.png',
+    badge: 'icon-192.png',
     data: data.data || {}
   };
   event.waitUntil(self.registration.showNotification(title, options));

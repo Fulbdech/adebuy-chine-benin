@@ -49,7 +49,7 @@ function initPush(){
     if (Notification.permission === 'granted') {
       new Notification(payload.notification?.title || 'Adebuy', {
         body: payload.notification?.body || '',
-        icon: 'assets/icon-192.png'
+        icon: 'icon-192.png'
       });
     }
   });
