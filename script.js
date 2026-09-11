@@ -4,6 +4,19 @@ function toggleNav(){
   if (nav) nav.classList.toggle('open');
 }
 
+// Close the mobile menu whenever a link inside it is clicked — including the
+// current page's own link, which doesn't trigger navigation and would
+// otherwise leave the menu stuck open.
+document.addEventListener('DOMContentLoaded', function(){
+  const nav = document.getElementById('nav-links');
+  if (!nav) return;
+  nav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      nav.classList.remove('open');
+    });
+  });
+});
+
 // ---------- Order form (used on contact.html) ----------
 function sendOrder(e){
   e.preventDefault();
