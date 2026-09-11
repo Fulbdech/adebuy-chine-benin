@@ -1,6 +1,6 @@
 // Bump this version string every time you deploy changes — it forces
 // the service worker to fetch fresh files instead of serving old cached ones.
-const CACHE_VERSION = 'adebuy-v1';
+const CACHE_VERSION = 'adebuy-v2';
 const CACHE_NAME = 'adebuy-cache-' + CACHE_VERSION;
 
 const PRECACHE_URLS = [
@@ -41,41 +41,27 @@ self.addEventListener('activate', (event) => {
 });
 
 // ---------- Fetch strategy ----------
-// Network-first for HTML (so content updates show up as soon as you're online),
-// falling back to cache, then to an offline page if nothing is cached.
-// Cache-first for everything else (CSS/JS/images), which rarely changes.
+// Network-first for everything: always try to get the freshest version online,
+// and only fall back to the cache when there's no connection. This keeps the
+// site instantly up to date after every deploy, while still working offline
+// once a page/asset has been visited at least once.
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
 
   const isHTML = req.headers.get('accept') && req.headers.get('accept').includes('text/html');
 
-  if (isHTML) {
-    event.respondWith(
-      fetch(req)
-        .then((res) => {
-          const resClone = res.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
-          return res;
-        })
-        .catch(() =>
-          caches.match(req).then((cached) => cached || caches.match('offline.html'))
-        )
-    );
-  } else {
-    event.respondWith(
-      caches.match(req).then((cached) => {
-        if (cached) return cached;
-        return fetch(req)
-          .then((res) => {
-            const resClone = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
-            return res;
-          })
-          .catch(() => cached);
+  event.respondWith(
+    fetch(req)
+      .then((res) => {
+        const resClone = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(req, resClone));
+        return res;
       })
-    );
-  }
+      .catch(() =>
+        caches.match(req).then((cached) => cached || (isHTML ? caches.match('offline.html') : undefined))
+      )
+  );
 });
 
 // ---------- Push notifications (Firebase Cloud Messaging) ----------
