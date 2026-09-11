@@ -40,6 +40,26 @@ header{position:sticky;top:0;z-index:50;background:rgba(246,248,251,.92);backdro
 .nav-cta{display:flex;align-items:center;gap:8px;background:var(--emerald);color:#04241a;padding:10px 16px;border-radius:100px;font-weight:600;font-size:.85rem;white-space:nowrap;}
 .nav-cta:hover{background:var(--emerald-dark);color:#fff;}
 .nav-cta svg{width:16px;height:16px;flex:none;}
+.nav-icon-btn{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--navy);border:1px solid var(--line);background:var(--card);flex:none;}
+.nav-icon-btn:hover{border-color:var(--emerald);color:var(--emerald-dark);}
+.nav-icon-btn svg{width:18px;height:18px;}
+
+/* ---------- install banner (shows from the very first visit) ---------- */
+#install-banner{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:100;
+  background:var(--navy);border-radius:16px;box-shadow:0 16px 40px -12px rgba(0,0,0,.4);
+  padding:14px 16px;color:#fff;max-width:480px;margin:0 auto;
+}
+.install-banner-inner{display:flex;align-items:center;gap:12px;}
+.install-banner-icon{font-size:1.6rem;flex:none;}
+.install-banner-text{flex:1;min-width:0;display:flex;flex-direction:column;}
+.install-banner-text b{font-size:.9rem;}
+.install-banner-text span{font-size:.76rem;color:rgba(255,255,255,.6);}
+.install-banner-btn{background:var(--emerald);color:#04241a;padding:9px 16px;border-radius:100px;font-weight:600;font-size:.82rem;flex:none;}
+.install-banner-btn:hover{background:var(--emerald-dark);color:#fff;}
+.install-banner-close{color:rgba(255,255,255,.5);font-size:1.3rem;line-height:1;padding:4px 6px;flex:none;}
+.install-banner-close:hover{color:#fff;}
+.install-banner-manual{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.5;}
 .nav{position:relative;}
 .nav-burger{display:none;background:none;border:none;padding:6px;margin-left:2px;color:var(--navy);}
 .nav-burger svg{width:24px;height:24px;display:block;}

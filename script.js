@@ -138,3 +138,78 @@ function renderTracking(row, box){
 }
 
 document.addEventListener('DOMContentLoaded', initTrackingForm);
+
+// ---------- Install banner: works from the very first visit, no need to wait for Chrome's automatic prompt ----------
+function initInstallBanner(){
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (isStandalone) return; // already installed, nothing to show
+  if (localStorage.getItem('adebuy_install_banner_dismissed') === '1') return;
+
+  const banner = document.createElement('div');
+  banner.id = 'install-banner';
+  banner.innerHTML = `
+    <div class="install-banner-inner">
+      <div class="install-banner-icon">📲</div>
+      <div class="install-banner-text">
+        <b>Installez Adebuy</b>
+        <span>Accès plus rapide, comme une vraie appli.</span>
+      </div>
+      <button class="install-banner-btn" id="install-banner-btn">Installer</button>
+      <button class="install-banner-close" id="install-banner-close" aria-label="Fermer">&times;</button>
+    </div>
+    <div class="install-banner-manual" id="install-banner-manual" style="display:none;">
+      Utilisez le menu <b>⋮</b> de votre navigateur → <b>« Installer l'application »</b> (ou « Ajouter à l'écran d'accueil » sur iPhone via le bouton Partager).
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  document.getElementById('install-banner-close').addEventListener('click', () => {
+    localStorage.setItem('adebuy_install_banner_dismissed', '1');
+    banner.remove();
+  });
+
+  document.getElementById('install-banner-btn').addEventListener('click', () => {
+    if (deferredInstallPrompt) {
+      installApp();
+    } else {
+      document.getElementById('install-banner-manual').style.display = 'block';
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', initInstallBanner);
+
+// ---------- PWA: service worker registration + auto-update ----------
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then((reg) => {
+      // When a new service worker takes over, reload once to pick up fresh content.
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'activated' && navigator.serviceWorker.controller) {
+            window.location.reload();
+          }
+        });
+      });
+    }).catch((err) => console.warn('Service worker registration failed:', err));
+  });
+}
+
+// ---------- PWA: custom "Install app" button (Android/desktop Chrome) ----------
+let deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const btn = document.getElementById('install-app-btn');
+  if (btn) btn.style.display = 'inline-flex';
+});
+
+function installApp(){
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.finally(() => {
+    deferredInstallPrompt = null;
+    const btn = document.getElementById('install-app-btn');
+    if (btn) btn.style.display = 'none';
+  });
+}
