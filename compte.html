@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon compte — ADEBUY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1f44">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Adebuy">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1782870219514300');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1782870219514300&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+  .auth-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:10px;font-size:.85rem;color:rgba(255,255,255,.6);}
+  .auth-tabs a{color:var(--emerald);font-weight:600;}
+  #auth-error{display:none;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.4);color:#fecaca;padding:10px 14px;border-radius:10px;font-size:.85rem;margin-bottom:16px;text-align:center;}
+  .dash-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:26px;}
+  .dash-head b{color:#fff;font-size:1.05rem;}
+  .dash-head span{color:rgba(255,255,255,.55);font-size:.82rem;display:block;}
+  #logout-btn{border:1px solid rgba(255,255,255,.25);color:#fff;padding:9px 16px;border-radius:100px;font-size:.82rem;font-weight:600;}
+  #logout-btn:hover{border-color:var(--emerald);color:var(--emerald);}
+  .add-package-row{display:flex;gap:10px;margin-bottom:26px;}
+  .add-package-row input{flex:1;}
+  .add-package-row button{background:var(--emerald);color:#04241a;padding:0 20px;border-radius:10px;font-weight:600;font-size:.88rem;}
+  .add-package-row button:hover{background:var(--emerald-dark);color:#fff;}
+  .user-package-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;margin-bottom:14px;}
+  .user-package-card .track-timeline{margin-top:6px;}
+  .remove-package-btn{margin-top:14px;font-size:.76rem;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);padding:6px 12px;border-radius:100px;}
+  .remove-package-btn:hover{color:#fecaca;border-color:rgba(239,68,68,.4);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav wrap">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Adebuy"><b>ADEBUY</b></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="suivi.html">Suivi</a>
+      <a href="politique.html">Politique</a>
+      <a href="contact.html">Contact</a>
+      <a href="compte.html" class="active">Mon compte</a>
+    </nav>
+    <div class="nav-right"><a class="nav-cta" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20veux%20en%20savoir%20plus%20sur%20Adebuy" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+      <span>+229 01 94 93 55 86</span>
+    </a><button class="nav-burger" onclick="toggleNav()" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button></div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="kicker">Espace personnel</div>
+    <h1>Mon compte</h1>
+    <p>Connectez-vous pour retrouver vos colis en un coup d'œil, sans retaper leur numéro à chaque fois.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="order-panel" id="auth-forms" style="max-width:460px;margin:0 auto;">
+      <div id="auth-error"></div>
+
+      <div id="login-panel">
+        <div class="section-head center" style="margin-bottom:24px;">
+          <h2 style="font-size:1.4rem;">Se connecter</h2>
+        </div>
+        <form id="login-form">
+          <div class="field" style="margin-bottom:16px;">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" required placeholder="vous@exemple.com">
+          </div>
+          <div class="field" style="margin-bottom:20px;">
+            <label for="login-password">Mot de passe</label>
+            <input type="password" id="login-password" required placeholder="••••••••">
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Se connecter</button>
+        </form>
+        <div class="auth-tabs">Pas encore de compte ? <a href="#" id="show-signup">Créer un compte</a></div>
+      </div>
+
+      <div id="signup-panel" style="display:none;">
+        <div class="section-head center" style="margin-bottom:24px;">
+          <h2 style="font-size:1.4rem;">Créer un compte</h2>
+        </div>
+        <form id="signup-form">
+          <div class="field" style="margin-bottom:16px;">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required placeholder="vous@exemple.com">
+          </div>
+          <div class="field" style="margin-bottom:20px;">
+            <label for="signup-password">Mot de passe (6 caractères min.)</label>
+            <input type="password" id="signup-password" required minlength="6" placeholder="••••••••">
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Créer mon compte</button>
+        </form>
+        <div class="auth-tabs">Déjà un compte ? <a href="#" id="show-login">Se connecter</a></div>
+      </div>
+    </div>
+
+    <div class="order-panel" id="account-dashboard" style="display:none;">
+      <div class="dash-head">
+        <div><b>Bonjour 👋</b><span id="account-email"></span></div>
+        <button id="logout-btn" type="button">Se déconnecter</button>
+      </div>
+
+      <form id="add-package-form" class="add-package-row">
+        <input type="text" id="add-package-input" placeholder="Ajouter un numéro de suivi (ex. ADB-2026-0142)" required>
+        <button type="submit">Ajouter</button>
+      </form>
+
+      <div id="user-packages-list"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Accueil</a><a href="tarifs.html">Tarifs</a><a href="suivi.html">Suivi</a><a href="politique.html">Politique</a><a href="contact.html">Contact</a><a href="compte.html">Mon compte</a>
+  </div>
+  © 2026 ADEBUY — Tout ce dont vous avez besoin, en un seul endroit. Cotonou, Bénin.
+</footer>
+
+<script src="script.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+<script src="auth.js"></script>
+</body>
+</html>
