@@ -37,26 +37,37 @@ const AUTH_ERROR_MESSAGES = {
   'auth/too-many-requests': "Trop de tentatives. Réessayez dans quelques minutes."
 };
 
+function withLoadingState(btn, loadingText, fn){
+  if (!btn) { fn(); return; }
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = loadingText;
+  Promise.resolve(fn()).finally(() => {
+    btn.disabled = false;
+    btn.textContent = original;
+  });
+}
+
 function signup(email, password){
   clearAuthError();
-  auth.createUserWithEmailAndPassword(email, password)
+  return auth.createUserWithEmailAndPassword(email, password)
     .catch((err) => showAuthError(AUTH_ERROR_MESSAGES[err.code] || err.message));
 }
 
 function login(email, password){
   clearAuthError();
-  auth.signInWithEmailAndPassword(email, password)
+  return auth.signInWithEmailAndPassword(email, password)
     .catch((err) => showAuthError(AUTH_ERROR_MESSAGES[err.code] || err.message));
 }
 
 function logout(){
-  auth.signOut();
+  return auth.signOut();
 }
 
 function addPackageToAccount(numero){
   const user = auth.currentUser;
-  if (!user || !numero) return;
-  db.collection('users').doc(user.uid).collection('packages').add({
+  if (!user || !numero) return Promise.resolve();
+  return db.collection('users').doc(user.uid).collection('packages').add({
     numero: numero.trim(),
     addedAt: firebase.firestore.FieldValue.serverTimestamp()
   }).then(() => {
@@ -137,20 +148,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (loginForm) loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    login(document.getElementById('login-email').value.trim(), document.getElementById('login-password').value);
+    const btn = loginForm.querySelector('button[type="submit"]');
+    withLoadingState(btn, 'Connexion…', () =>
+      login(document.getElementById('login-email').value.trim(), document.getElementById('login-password').value)
+    );
   });
 
   if (signupForm) signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    signup(document.getElementById('signup-email').value.trim(), document.getElementById('signup-password').value);
+    const btn = signupForm.querySelector('button[type="submit"]');
+    withLoadingState(btn, 'Création…', () =>
+      signup(document.getElementById('signup-email').value.trim(), document.getElementById('signup-password').value)
+    );
   });
 
   if (addPackageForm) addPackageForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    addPackageToAccount(document.getElementById('add-package-input').value);
+    const btn = addPackageForm.querySelector('button[type="submit"]');
+    withLoadingState(btn, '...', () =>
+      addPackageToAccount(document.getElementById('add-package-input').value)
+    );
   });
 
-  if (logoutBtn) logoutBtn.addEventListener('click', logout);
+  if (logoutBtn) logoutBtn.addEventListener('click', () => {
+    withLoadingState(logoutBtn, 'Déconnexion…', logout);
+  });
 
   if (showSignup) showSignup.addEventListener('click', (e) => {
     e.preventDefault();

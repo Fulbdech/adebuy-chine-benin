@@ -176,9 +176,21 @@ function initInstallBanner(){
   `;
   document.body.appendChild(banner);
 
+  // Reserve space at the bottom of the page equal to the banner's height,
+  // so fixed positioning never overlaps and blocks taps on real content
+  // underneath (this was causing inputs/buttons near the bottom of the
+  // screen to be untappable).
+  function reserveSpace(){
+    document.body.style.paddingBottom = banner.offsetHeight + 16 + 'px';
+  }
+  reserveSpace();
+  window.addEventListener('resize', reserveSpace);
+
   document.getElementById('install-banner-close').addEventListener('click', () => {
     localStorage.setItem('adebuy_install_banner_dismissed', '1');
     banner.remove();
+    document.body.style.paddingBottom = '';
+    window.removeEventListener('resize', reserveSpace);
   });
 
   document.getElementById('install-banner-btn').addEventListener('click', () => {
@@ -186,7 +198,14 @@ function initInstallBanner(){
       installApp();
     } else {
       document.getElementById('install-banner-manual').style.display = 'block';
+      reserveSpace();
     }
+  });
+
+  window.addEventListener('appinstalled', () => {
+    banner.remove();
+    document.body.style.paddingBottom = '';
+    window.removeEventListener('resize', reserveSpace);
   });
 }
 document.addEventListener('DOMContentLoaded', initInstallBanner);
