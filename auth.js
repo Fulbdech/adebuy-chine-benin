@@ -12,11 +12,26 @@ const AUTH_FIREBASE_CONFIG = {
   appId: "1:739115474396:web:42bc0bbbd9437fc7fe0319"
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(AUTH_FIREBASE_CONFIG);
+// Defensive init: if the Firebase SDK scripts failed to load (slow network,
+// ad-blocker, temporary Google CDN hiccup...), don't let the whole file crash
+// silently and leave every button on the page unresponsive. Instead, flag it
+// and show a clear, visible error so the person knows to retry.
+let firebaseReady = false;
+let auth = null;
+let db = null;
+try {
+  if (typeof firebase === 'undefined') {
+    throw new Error('Firebase SDK not loaded');
+  }
+  if (!firebase.apps.length) {
+    firebase.initializeApp(AUTH_FIREBASE_CONFIG);
+  }
+  auth = firebase.auth();
+  db = firebase.firestore();
+  firebaseReady = true;
+} catch (err) {
+  console.error('Firebase init failed:', err);
 }
-const auth = firebase.auth();
-const db = firebase.firestore();
 
 function showAuthError(msg){
   const el = document.getElementById('auth-error');
@@ -49,22 +64,26 @@ function withLoadingState(btn, loadingText, fn){
 }
 
 function signup(email, password){
+  if (!firebaseReady) { showAuthError("Connexion au service impossible. Vérifiez votre internet et rechargez la page."); return Promise.resolve(); }
   clearAuthError();
   return auth.createUserWithEmailAndPassword(email, password)
     .catch((err) => showAuthError(AUTH_ERROR_MESSAGES[err.code] || err.message));
 }
 
 function login(email, password){
+  if (!firebaseReady) { showAuthError("Connexion au service impossible. Vérifiez votre internet et rechargez la page."); return Promise.resolve(); }
   clearAuthError();
   return auth.signInWithEmailAndPassword(email, password)
     .catch((err) => showAuthError(AUTH_ERROR_MESSAGES[err.code] || err.message));
 }
 
 function logout(){
+  if (!firebaseReady) return Promise.resolve();
   return auth.signOut();
 }
 
 function addPackageToAccount(numero){
+  if (!firebaseReady) return Promise.resolve();
   const user = auth.currentUser;
   if (!user || !numero) return Promise.resolve();
   return db.collection('users').doc(user.uid).collection('packages').add({
@@ -77,12 +96,14 @@ function addPackageToAccount(numero){
 }
 
 function removePackage(docId, uid){
+  if (!firebaseReady) return;
   db.collection('users').doc(uid).collection('packages').doc(docId).delete()
     .then(() => loadUserPackages(uid))
     .catch((err) => console.error('Erreur suppression :', err));
 }
 
 function loadUserPackages(uid){
+  if (!firebaseReady) return;
   const list = document.getElementById('user-packages-list');
   if (!list) return;
   list.innerHTML = '<div class="track-msg">Chargement…</div>';
@@ -187,18 +208,22 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('login-panel').style.display = 'block';
   });
 
-  auth.onAuthStateChanged((user) => {
-    const authSection = document.getElementById('auth-forms');
-    const dashSection = document.getElementById('account-dashboard');
-    if (user) {
-      if (authSection) authSection.style.display = 'none';
-      if (dashSection) dashSection.style.display = 'block';
-      const emailEl = document.getElementById('account-email');
-      if (emailEl) emailEl.textContent = user.email;
-      loadUserPackages(user.uid);
-    } else {
-      if (authSection) authSection.style.display = 'block';
-      if (dashSection) dashSection.style.display = 'none';
-    }
-  });
+  if (firebaseReady) {
+    auth.onAuthStateChanged((user) => {
+      const authSection = document.getElementById('auth-forms');
+      const dashSection = document.getElementById('account-dashboard');
+      if (user) {
+        if (authSection) authSection.style.display = 'none';
+        if (dashSection) dashSection.style.display = 'block';
+        const emailEl = document.getElementById('account-email');
+        if (emailEl) emailEl.textContent = user.email;
+        loadUserPackages(user.uid);
+      } else {
+        if (authSection) authSection.style.display = 'block';
+        if (dashSection) dashSection.style.display = 'none';
+      }
+    });
+  } else {
+    showAuthError("Impossible de charger le service de connexion (Firebase). Vérifiez votre connexion internet et rechargez la page. Si le problème persiste, un bloqueur de publicité pourrait être en cause.");
+  }
 });
