@@ -262,10 +262,10 @@ footer .foot-links a:hover{color:var(--navy);}
 .cat-tab:hover{border-color:var(--emerald);color:var(--navy);}
 .cat-tab.active{background:var(--navy);border-color:var(--navy);color:#fff;}
 
-.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);row-gap:44px;column-gap:22px;}
 
 .pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease;}
-.pcard:hover{transform:translateY(-4px);box-shadow:0 20px 40px -22px rgba(10,31,68,.25);}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 14px 24px -16px rgba(10,31,68,.22);}
 
 .pcard-media{position:relative;aspect-ratio:1/1;background:var(--navy);overflow:hidden;}
 .pcard-media img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -277,9 +277,9 @@ footer .foot-links a:hover{color:var(--navy);}
 .pcard-specs{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:4px;}
 .pcard-specs li{font-size:.78rem;color:var(--muted);line-height:1.4;padding-left:14px;position:relative;}
 .pcard-specs li::before{content:"—";position:absolute;left:0;color:var(--emerald-dark);}
-.pcard-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
-.pcard-meta-item{display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--line);border-radius:100px;padding:5px 10px;font-size:.7rem;color:var(--navy);font-weight:600;}
-.pcard-meta-item svg{width:13px;height:13px;flex:none;color:var(--emerald-dark);}
+.pcard-meta{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.pcard-meta-item{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.72rem;font-weight:500;}
+.pcard-meta-item svg{width:12px;height:12px;flex:none;color:var(--emerald-dark);}
 .pcard-price-block{display:flex;flex-direction:column;margin:auto 0 14px;padding-top:14px;border-top:1px solid var(--line);}
 .pcard-price-amt{font-family:'IBM Plex Mono',monospace;font-size:1.32rem;font-weight:600;color:var(--navy);}
 .pcard-price-note{font-size:.7rem;color:var(--muted);margin-top:2px;}
