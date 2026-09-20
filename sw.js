@@ -1,10 +1,11 @@
 // Bump this version string every time you deploy changes — it forces
 // the service worker to fetch fresh files instead of serving old cached ones.
-const CACHE_VERSION = 'adebuy-v2';
+const CACHE_VERSION = 'adebuy-v3';
 const CACHE_NAME = 'adebuy-cache-' + CACHE_VERSION;
 
 const PRECACHE_URLS = [
   'index.html',
+  'catalogue.html',
   'tarifs.html',
   'suivi.html',
   'politique.html',

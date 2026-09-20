@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalogue — ADEBUY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a1f44">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Adebuy">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1782870219514300');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1782870219514300&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+<header>
+  <div class="nav wrap">
+    <a class="brand" href="index.html"><img src="logo.png" alt="Adebuy"><b>ADEBUY</b></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="index.html">Accueil</a>
+      <a href="catalogue.html" class="active">Catalogue</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="suivi.html">Suivi</a>
+      <a href="politique.html">Politique</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right"><button id="install-app-btn" class="nav-icon-btn" style="display:none;" onclick="installApp()" title="Installer l'app" aria-label="Installer l'app">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+    </button>
+    <button id="enable-push-btn" class="nav-icon-btn" style="display:none;" title="Activer les notifications" aria-label="Activer les notifications">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </button>
+    <a class="nav-cta" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20veux%20en%20savoir%20plus%20sur%20Adebuy" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+      <span>+229 01 94 93 55 86</span>
+    </a><button class="nav-burger" onclick="toggleNav()" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button></div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="kicker">Catalogue</div>
+    <h1>Des produits, des prix clairs</h1>
+    <p>Le prix affiché inclut le produit et nos frais de service. Seul le transport n'est pas compris — il dépend du poids réel et vous est communiqué à la réception du colis en Chine, réglé au retrait.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+
+    <div class="cat-tabs" id="cat-tabs">
+      <button class="cat-tab active" data-cat="all">Tous</button>
+      <button class="cat-tab" data-cat="telephones">Téléphones</button>
+      <button class="cat-tab" data-cat="ordinateurs">Ordinateurs</button>
+      <button class="cat-tab" data-cat="dji">DJI</button>
+      <button class="cat-tab" data-cat="autres">Autres</button>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+
+      <!-- ===================================================================
+           MODÈLE DE FICHE PRODUIT — copiez ce bloc pour ajouter un produit.
+           1. Changez data-cat en : telephones / ordinateurs / dji / autres
+           2. Remplissez nom, specs, poids, mode d'envoi conseillé, prix
+           3. Le bouton WhatsApp pré-remplit déjà le message avec le nom du produit
+           =================================================================== -->
+
+      <article class="pcard" data-cat="telephones">
+        <div class="pcard-badge">Exemple — à remplacer</div>
+        <h3 class="pcard-name">iPhone 13 128Go</h3>
+        <ul class="pcard-specs">
+          <li>128 Go de stockage</li>
+          <li>Couleur au choix (selon dispo)</li>
+          <li>État : neuf, sous scellé</li>
+        </ul>
+        <div class="pcard-meta">
+          <span><b>Poids :</b> 0,3 kg</span>
+          <span><b>Envoi conseillé :</b> Aérien</span>
+        </div>
+        <div class="pcard-price-row">
+          <div class="pcard-price">
+            <span class="pcard-price-amt">245 000 FCFA</span>
+            <span class="pcard-price-note">produit + service, hors transport</span>
+          </div>
+          <a class="btn btn-primary pcard-cta" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20%3A%20iPhone%2013%20128Go" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+            Commander
+          </a>
+        </div>
+      </article>
+
+      <article class="pcard" data-cat="ordinateurs">
+        <div class="pcard-badge">Exemple — à remplacer</div>
+        <h3 class="pcard-name">MacBook Air M1 8/256Go</h3>
+        <ul class="pcard-specs">
+          <li>Puce M1, 8 Go RAM, 256 Go SSD</li>
+          <li>Écran 13,3"</li>
+          <li>État : neuf, sous scellé</li>
+        </ul>
+        <div class="pcard-meta">
+          <span><b>Poids :</b> 1,3 kg</span>
+          <span><b>Envoi conseillé :</b> Aérien</span>
+        </div>
+        <div class="pcard-price-row">
+          <div class="pcard-price">
+            <span class="pcard-price-amt">520 000 FCFA</span>
+            <span class="pcard-price-note">produit + service, hors transport</span>
+          </div>
+          <a class="btn btn-primary pcard-cta" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20%3A%20MacBook%20Air%20M1%208%2F256Go" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+            Commander
+          </a>
+        </div>
+      </article>
+
+      <article class="pcard" data-cat="dji">
+        <div class="pcard-badge">Exemple — à remplacer</div>
+        <h3 class="pcard-name">DJI Mini 4 Pro</h3>
+        <ul class="pcard-specs">
+          <li>Caméra 4K/60fps, capteur 1/1.3"</li>
+          <li>Autonomie ≈ 34 min</li>
+          <li>Détection d'obstacles omnidirectionnelle</li>
+        </ul>
+        <div class="pcard-meta">
+          <span><b>Poids :</b> 0,25 kg (drone seul)</span>
+          <span><b>Envoi conseillé :</b> Aérien, spécial</span>
+        </div>
+        <div class="pcard-price-row">
+          <div class="pcard-price">
+            <span class="pcard-price-amt">610 000 FCFA</span>
+            <span class="pcard-price-note">produit + service, hors transport</span>
+          </div>
+          <a class="btn btn-primary pcard-cta" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20%3A%20DJI%20Mini%204%20Pro" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+            Commander
+          </a>
+        </div>
+      </article>
+
+      <!-- Fin des exemples. Ajoutez vos vrais produits en dessous, même structure. -->
+
+    </div>
+
+    <p id="empty-cat-msg" style="display:none;text-align:center;color:var(--muted);padding:40px 0;">Aucun produit dans cette catégorie pour le moment — contactez-nous sur WhatsApp, on s'en occupe.</p>
+
+    <p style="text-align:center;color:var(--muted);font-size:.85rem;margin-top:32px;">
+      Vous ne trouvez pas ce que vous cherchez ? <a href="contact.html" style="color:var(--emerald-dark);font-weight:600;">Décrivez-le-nous</a>, on vous fait un devis personnalisé.
+    </p>
+
+  </div>
+</section>
+
+<section class="section order-panel-wrap">
+  <div class="wrap">
+    <div class="order-panel">
+      <div class="section-head">
+        <div class="kicker">Un produit vous intéresse ?</div>
+        <h2>Une idée du prix pour votre produit ?</h2>
+        <p>Décrivez-le-nous sur WhatsApp, on vous répond avec un devis personnalisé.</p>
+      </div>
+      <a class="btn btn-primary" href="https://wa.me/2290194935586?text=Bonjour%2C%20je%20veux%20un%20devis%20pour%20un%20produit" target="_blank" rel="noopener" onclick="if(window.fbq){fbq('track','Contact');}">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92C21.96 6.45 17.51 2 12.04 2Zm5.8 14.19c-.24.68-1.4 1.32-1.94 1.4-.5.08-1.12.11-1.8-.11-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.16-4.94-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36h.56c.18 0 .42-.07.65.5.24.58.82 2 .89 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.72 1.19 1.55 1.93 1.06.95 1.96 1.24 2.24 1.38.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.27.36-.22.6-.13.24.09 1.53.72 1.79.85.26.13.44.19.5.3.07.11.07.63-.17 1.31Z"/></svg>
+        Demander un devis
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">Accueil</a><a href="catalogue.html">Catalogue</a><a href="tarifs.html">Tarifs</a><a href="suivi.html">Suivi</a><a href="politique.html">Politique</a><a href="contact.html">Contact</a></div>
+  © 2026 ADEBUY — Tout ce dont vous avez besoin, en un seul endroit. Cotonou, Bénin.
+</footer>
+
+<script src="script.js"></script>
+<script>
+(function(){
+  var tabs = document.querySelectorAll('.cat-tab');
+  var cards = document.querySelectorAll('.pcard');
+  var emptyMsg = document.getElementById('empty-cat-msg');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var cat = tab.getAttribute('data-cat');
+      var visibleCount = 0;
+      cards.forEach(function(card){
+        var show = (cat === 'all' || card.getAttribute('data-cat') === cat);
+        card.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
+      });
+      emptyMsg.style.display = visibleCount === 0 ? '' : 'none';
+    });
+  });
+})();
+</script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging-compat.js"></script>
+<script src="push.js"></script>
+</body>
+</html>
