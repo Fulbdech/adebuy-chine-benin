@@ -152,6 +152,78 @@ function renderTracking(row, box){
 
 document.addEventListener('DOMContentLoaded', initTrackingForm);
 
+// ---------- Épargne lookup (used on epargne.html) ----------
+// À créer : un Google Sheet distinct de celui des colis, publié en CSV (Fichier > Partager > Publier sur le web > CSV),
+// avec les colonnes : Code, Client, Produit, MontantCible, MontantVerse, Statut, DernierVersement
+const EPARGNE_SHEET_CSV_URL = 'REPLACE_WITH_EPARGNE_SHEET_CSV_URL';
+
+function initEpargneForm(){
+  const form = document.getElementById('epargne-form');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const input = document.getElementById('epargne-input').value.trim();
+    const resultBox = document.getElementById('epargne-result');
+    if (!input) return;
+
+    resultBox.innerHTML = '<div class="track-msg">Recherche en cours…</div>';
+
+    if (EPARGNE_SHEET_CSV_URL.indexOf('REPLACE_WITH') === 0) {
+      resultBox.innerHTML = '<div class="track-msg error">Le suivi d\'épargne n\'est pas encore connecté — contactez-nous directement sur WhatsApp pour l\'état de votre épargne.</div>';
+      return;
+    }
+
+    fetch(EPARGNE_SHEET_CSV_URL)
+      .then(res => res.text())
+      .then(text => {
+        const rows = parseCSV(text);
+        const match = rows.find(r => (r.Code || '').toLowerCase() === input.toLowerCase());
+        if (!match) {
+          resultBox.innerHTML = '<div class="track-msg error">Aucune épargne trouvée avec ce code. Vérifiez la saisie ou contactez-nous sur WhatsApp.</div>';
+          return;
+        }
+        renderEpargne(match, resultBox);
+      })
+      .catch(() => {
+        resultBox.innerHTML = '<div class="track-msg error">Impossible de récupérer les données pour le moment. Réessayez dans un instant.</div>';
+      });
+  });
+}
+
+function renderEpargne(row, box){
+  const cible = parseFloat((row.MontantCible || '0').replace(/[^\d.]/g, '')) || 0;
+  const verse = parseFloat((row.MontantVerse || '0').replace(/[^\d.]/g, '')) || 0;
+  const pct = cible === 0 ? 0 : Math.min(100, Math.round((verse / cible) * 100));
+  const restant = Math.max(0, cible - verse);
+
+  function fmt(n){ return Math.round(n).toLocaleString('fr-FR') + ' FCFA'; }
+
+  let html = '<div class="track-result">';
+  html += '<div class="rp-name">' + (row.Produit || 'Votre épargne') + '</div>';
+  html += '<div class="rp-num">Code ' + row.Code + ' · ' + (row.Statut || 'En cours') + '</div>';
+
+  html += '<div class="epg-bar-wrap"><div class="epg-bar"><div class="epg-bar-fill" style="width:' + pct + '%"></div></div>';
+  html += '<div class="epg-pct">' + pct + '%</div></div>';
+
+  html += '<div class="epg-stats">';
+  html += '<div class="epg-stat"><span>Versé</span><b>' + fmt(verse) + '</b></div>';
+  html += '<div class="epg-stat"><span>Objectif</span><b>' + fmt(cible) + '</b></div>';
+  html += '<div class="epg-stat"><span>Restant</span><b>' + fmt(restant) + '</b></div>';
+  html += '</div>';
+
+  if (row.DernierVersement) {
+    html += '<div class="epg-last">Dernier versement : ' + row.DernierVersement + '</div>';
+  }
+  if (pct >= 100) {
+    html += '<div class="track-msg" style="margin-top:14px;background:rgba(31,191,135,.12);color:var(--emerald-dark);border-color:rgba(31,191,135,.3);">🎉 Objectif atteint — votre commande est lancée, contactez-nous sur WhatsApp si vous n\'avez pas encore de nouvelles.</div>';
+  }
+
+  html += '</div>';
+  box.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', initEpargneForm);
+
 // ---------- Install banner: works from the very first visit, no need to wait for Chrome's automatic prompt ----------
 function initInstallBanner(){
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
